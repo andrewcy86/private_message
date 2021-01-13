@@ -4,6 +4,7 @@
   "keywords": ["wordpress", "message", "PATT"],
   "homepage": "https://epa.gov",
   "license": "MIT",
+  "version": "2.1.2",
   "authors": [
     {
       "name": "Andrew Yuen",
