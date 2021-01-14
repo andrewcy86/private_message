@@ -69,7 +69,7 @@ a:hover {
     font-size: 13px;
 }
 </style>
-ANNNNNNDREEEEWWW======
+
 <button type="button" class="button" id="pm_refresh_btn"><i class="fas fa-retweet"></i> Reset Sort </i></button>
 <button type="button" class="button" id="pm_sort_btn"><i class="fas fa-sort"></i> Group Messages </i></button>
 <br /><br />
@@ -82,7 +82,7 @@ ANNNNNNDREEEEWWW======
   <option value="delete">Mark as Deleted</option>
 </select>
 <button type="button" class="button" id="pm_apply_bulk_action">Apply</button>
-sklajdklsajd1-02-32-103-123
+
 <table id="tbl_templates_messages" class="display nowrap" cellspacing="5" cellpadding="5" width="100%">
         <thead>
             <tr>
