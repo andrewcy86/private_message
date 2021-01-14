@@ -121,7 +121,7 @@ a:hover {
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<? echo $url; ?>
+<? //echo $url; ?>
 <link rel="stylesheet" type="text/css" href="<?php echo $subfolder_path; ?>/wp-content/plugins/private-messages-for-wordpress/css/bootstrap-modal.css"/>
 
 <link rel="stylesheet" type="text/css" href="<?php echo $subfolder_path; ?>/wp-content/plugins/pattracking/asset/lib/DataTables/datatables.min.css"/>
