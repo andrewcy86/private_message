@@ -18,6 +18,9 @@ function rwpm_inbox() {
     $num_unread = $unread_message_count->unread_message_count;
     
     echo '<p>', sprintf( _n( 'You have %d private message (%d unread).', 'You have %d private messages (%d unread).', $n, 'pm4wp' ), $n, $num_unread ), '</p>';
+
+$url = plugins_url();
+
 ?>
 
 <style>
@@ -118,7 +121,7 @@ a:hover {
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
+<? echo $url; ?>
 <link rel="stylesheet" type="text/css" href="<?php echo $subfolder_path; ?>/wp-content/plugins/private-messages-for-wordpress/css/bootstrap-modal.css"/>
 
 <link rel="stylesheet" type="text/css" href="<?php echo $subfolder_path; ?>/wp-content/plugins/pattracking/asset/lib/DataTables/datatables.min.css"/>
