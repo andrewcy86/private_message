@@ -82,7 +82,7 @@ a:hover {
   <option value="delete">Mark as Deleted</option>
 </select>
 <button type="button" class="button" id="pm_apply_bulk_action">Apply</button>
-88888AAAA88888
+17171717AAAA717171717
 <table id="tbl_templates_messages" class="display nowrap" cellspacing="5" cellpadding="5" width="100%">
         <thead>
             <tr>
