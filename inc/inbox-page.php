@@ -2,7 +2,7 @@
 
 function rwpm_inbox() {
     global $wpdb, $current_user;
-    $subfolder_path = site_url( '', 'relative'); 
+
     $pm_id = $_GET['id'];
     
     $total_message_count = $wpdb->get_row("SELECT COUNT(a.id) as total_message_count
@@ -18,8 +18,6 @@ function rwpm_inbox() {
     $num_unread = $unread_message_count->unread_message_count;
     
     echo '<p>', sprintf( _n( 'You have %d private message (%d unread).', 'You have %d private messages (%d unread).', $n, 'pm4wp' ), $n, $num_unread ), '</p>';
-
-$url = plugins_url();
 
 ?>
 
@@ -121,11 +119,11 @@ a:hover {
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-<? //echo $url; ?> Andrew
-<link rel="stylesheet" type="text/css" href="<?php echo $subfolder_path; ?>/wp-content/plugins/private-messages-for-wordpress/css/bootstrap-modal.css"/>
 
-<link rel="stylesheet" type="text/css" href="<?php echo $subfolder_path; ?>/wp-content/plugins/pattracking/asset/lib/DataTables/datatables.min.css"/>
-<script type="text/javascript" src="<?php echo $subfolder_path; ?>/wp-content/plugins/pattracking/asset/lib/DataTables/datatables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?php echo plugin_dir_url( __DIR__ ) ?>/css/bootstrap-modal.css"/>
+
+<link rel="stylesheet" type="text/css" href="<?php echo dirname(plugin_dir_url( __DIR__ )) ?>/pattracking/asset/lib/DataTables/datatables.min.css"/>
+<script type="text/javascript" src="<?php echo dirname(plugin_dir_url( __DIR__ )) ?>/pattracking/asset/lib/DataTables/datatables.min.js"></script>
 
 <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/css/dataTables.checkboxes.css" rel="stylesheet" />
 <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.11/js/dataTables.checkboxes.min.js"></script>
@@ -156,7 +154,7 @@ jQuery(document).ready(function() {
 	        console.log(response);
     	},
 	  'ajax': {
-       'url':'<?php echo $subfolder_path; ?>/wp-content/plugins/private-messages-for-wordpress/inc/scripts/message_processing.php',
+       'url':'<?php echo plugin_dir_url( __DIR__ ) ?>/inc/scripts/message_processing.php',
        'data': function(data){
           // Read values
           var uid = jQuery('#user_id').val();
@@ -225,7 +223,7 @@ function htmlDecode(input){
         console.log(htmlDecode(full_row));
         
     jQuery.post(
-   '<?php echo $subfolder_path; ?>/wp-content/plugins/private-messages-for-wordpress/inc/scripts/mark_read.php',{
+   '<?php echo plugin_dir_url( __DIR__ ) ?>/inc/scripts/mark_read.php',{
     postvarsmessageid : id_row
     }); 
         jQuery('#DescModal').modal("show");
@@ -242,7 +240,7 @@ function htmlDecode(input){
     var bulk_action = jQuery('#message_action').val();
 
     jQuery.post(
-   '<?php echo $subfolder_path; ?>/wp-content/plugins/private-messages-for-wordpress/inc/scripts/bulk_update.php',{
+   '<?php echo plugin_dir_url( __DIR__ ) ?>/inc/scripts/bulk_update.php',{
     postvaraction : bulk_action,
     postvarselection : rows_selected.join(",")
     },
