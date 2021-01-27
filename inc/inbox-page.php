@@ -71,7 +71,7 @@ a:hover {
 }
 </style>
 
-<button type="button" class="button" id="pm_refresh_btn"><i class="fas fa-retweet"></i> Reset Sort </i></button>
+<button type="button" class="button" id="pm_refresh_btn"><i class="fas fa-retweet"></i> Reset </i></button>
 <button type="button" class="button" id="pm_sort_btn"><i class="fas fa-sort"></i> Group Messages </i></button>
 <br /><br />
 <div class="table-responsive" style="overflow-x:auto;">
@@ -264,6 +264,7 @@ function htmlDecode(input){
 
         table
     .order( [ 4, 'desc' ] )
+    .search('')
     .draw();
     });
     
