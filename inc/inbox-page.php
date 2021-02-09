@@ -6,21 +6,19 @@ function rwpm_inbox() {
     $pm_id = $_GET['id'];
     
     $total_message_count = $wpdb->get_row("SELECT COUNT(a.id) as total_message_count
-    FROM wpqa_pm a 
-    INNER JOIN wpqa_pm_users b ON a.id = b.pm_id 
+    FROM " . $wpdb->prefix . "pm a 
+    INNER JOIN " . $wpdb->prefix . "pm_users b ON a.id = b.pm_id 
     WHERE b.recipient = " . $current_user->ID . " AND b.deleted != '2' ");
     $n = $total_message_count->total_message_count;
     
     $unread_message_count = $wpdb->get_row("SELECT COUNT(a.id) as unread_message_count
-    FROM wpqa_pm a 
-    INNER JOIN wpqa_pm_users b ON a.id = b.pm_id 
+    FROM " . $wpdb->prefix . "pm a 
+    INNER JOIN " . $wpdb->prefix . "pm_users b ON a.id = b.pm_id 
     WHERE b.recipient = " . $current_user->ID . " AND b.deleted != '2' AND b.viewed = 0");
     $num_unread = $unread_message_count->unread_message_count;
     
     echo '<p>', sprintf( _n( 'You have %d private message (%d unread).', 'You have %d private messages (%d unread).', $n, 'pm4wp' ), $n, $num_unread ), '</p>';
-
 ?>
-
 <style>
 body {
     margin-right:1.5%;
@@ -234,8 +232,7 @@ function htmlDecode(input){
 
 
         jQuery('#frm-messages').on('click', '#pm_apply_bulk_action', function (event) {
-        event.preventDefault();
-
+        //event.preventDefault();
     var rows_selected = table.column(0).checkboxes.selected();
     var bulk_action = jQuery('#message_action').val();
 
@@ -246,11 +243,13 @@ function htmlDecode(input){
     },
     function (response) {
         alert(response);
+        table.ajax.reload( null, false );
+        table.column(0).checkboxes.deselectAll();
     });
 
-    table.column(0).checkboxes.deselectAll();
+
     //table.ajax.reload( null, false );
-    window.location.reload();
+    //window.location.reload();
     });
     
     jQuery('#pm_sort_btn').on('click', function(){

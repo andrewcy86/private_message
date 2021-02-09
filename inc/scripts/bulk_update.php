@@ -12,8 +12,10 @@ $selection_arr = explode (",", $selection);
 
 if(isset($bulk_action) && isset($selection) && ($bulk_action != '')){
 
-$table_pm_users = 'wpqa_pm_users';
+$table_pm_users = $wpdb->prefix . 'pm_users';
 
+
+if($selection != ''){
 if($bulk_action == 'read') {
 
 foreach($selection_arr as $key) {
@@ -32,6 +34,10 @@ $pm_users_data_where = array('pm_id' => $key);
 $wpdb->update($table_pm_users , $pm_users_data_update, $pm_users_data_where);
 }
 echo "The selected messages have been deleted.";
+}
+
+} else {
+echo "Nothing Selected.";
 }
 
 } else {

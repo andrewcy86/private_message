@@ -35,14 +35,14 @@ if($searchValue != ''){
 }
 
 ## Total number of records without filtering
-$sel = mysqli_query($con,"select count(*) as allcount FROM wpqa_pm a 
-INNER JOIN wpqa_pm_users b ON a.id = b.pm_id WHERE b.deleted != '2' AND b.recipient = ".$userID);
+$sel = mysqli_query($con,"select count(*) as allcount FROM " . $wpdb->prefix . "pm a 
+INNER JOIN " . $wpdb->prefix . "pm_users b ON a.id = b.pm_id WHERE b.deleted != '2' AND b.recipient = ".$userID);
 $records = mysqli_fetch_assoc($sel);
 $totalRecords = $records['allcount'];
 
 ## Total number of records with filtering
-$sel = mysqli_query($con,"select count(*) as allcount FROM wpqa_pm a 
-INNER JOIN wpqa_pm_users b ON a.id = b.pm_id
+$sel = mysqli_query($con,"select count(*) as allcount FROM " . $wpdb->prefix . "pm a 
+INNER JOIN " . $wpdb->prefix . "pm_users b ON a.id = b.pm_id
 WHERE 1 ".$searchQuery." AND b.deleted != '2' AND b.recipient = ".$userID);
 $records = mysqli_fetch_assoc($sel);
 $totalRecordwithFilter = $records['allcount'];
@@ -67,8 +67,8 @@ THEN 'No additional message.'
 ELSE a.content
 END as content
 
-FROM wpqa_pm a 
-INNER JOIN wpqa_pm_users b ON a.id = b.pm_id
+FROM " . $wpdb->prefix . "pm a 
+INNER JOIN " . $wpdb->prefix . "pm_users b ON a.id = b.pm_id
 WHERE 1 ".$searchQuery." AND b.deleted != '2' AND b.recipient = ".$userID." order by ".$columnName." ".$columnSortOrder.$row_limit;
 $messageRecords = mysqli_query($con, $messageQuery);
 $data = array();
@@ -92,7 +92,9 @@ $response = array(
   "iTotalRecords" => $totalRecords,
   "iTotalDisplayRecords" => $totalRecordwithFilter,
     "test" => $messageQuery,
-  "aaData" => $data
+  "aaData" => $data,
+  "userID" => $userID,
+  "searchQuery" => $searchQuery
 );
 
 echo json_encode($response);
