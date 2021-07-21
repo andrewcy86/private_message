@@ -75,7 +75,7 @@ a:hover {
 <div class="table-responsive" style="overflow-x:auto;">
 <form id="frm-messages" method="POST">
 
-<select id="message_action" name="message_action">
+<select id="message_action" name="message_action" aria-label="Bulk Message Action">
   <option value="">Bulk actions</option>
   <option value="read">Mark as Read</option>
   <option value="delete">Mark as Deleted</option>
@@ -175,7 +175,7 @@ jQuery(document).ready(function() {
       ],
             'order': [[4, 'desc']],
       'columns': [
-       { data: 'id' },
+       { data: 'id', 'title': 'Select All Checkbox'},
        { data: 'identifier' },
        { data: 'subject' }, 
        { data: 'content' },
@@ -266,8 +266,7 @@ function htmlDecode(input){
     .search('')
     .draw();
     });
-    
-	
+
 });
 
 </script>
