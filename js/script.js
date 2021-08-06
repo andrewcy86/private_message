@@ -1,6 +1,5 @@
 jQuery( document ).ready( function ( $ )
 {
-
 	/**
 	 * Split string into multiple values, separated by commas
 	 *

@@ -38,6 +38,11 @@ color: rgb(255, 255, 255) !important;
 width: 100%;
 }
 
+.text_highlight_messages a:link, a:visited {
+  color:#1d4289;
+  text-decoration: underline;
+}
+
 a:link {
   text-decoration: none;
 }
@@ -67,6 +72,12 @@ a:hover {
 .message-details {
     font-size: 13px;
 }
+
+#modal-close:focus {
+    outline: none !important;
+    border:4px solid black !important;
+    box-shadow: 0 0 10px #719ECE !important;
+}
 </style>
 
 <button type="button" class="button" id="pm_refresh_btn"><i class="fas fa-retweet"></i> Reset </i></button>
@@ -85,11 +96,11 @@ a:hover {
 <table id="tbl_templates_messages" class="display nowrap" cellspacing="5" cellpadding="5" width="100%">
         <thead>
             <tr>
-                <th class="datatable_header"></th>
-                <th class="datatable_header">Identifier</th>
-                <th class="datatable_header">Subject</th>
-                <th class="datatable_header">Content</th>
-                <th class="datatable_header">Date</th>
+                <th class="datatable_header" scope="col"></th>
+                <th class="datatable_header" scope="col">Identifier</th>
+                <th class="datatable_header" scope="col">Subject</th>
+                <th class="datatable_header" scope="col">Content</th>
+                <th class="datatable_header" scope="col">Date</th>
             </tr>
         </thead>
     </table>
@@ -109,7 +120,7 @@ a:hover {
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" id="modal-close" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -177,7 +188,7 @@ jQuery(document).ready(function() {
       'columns': [
        { data: 'id', 'title': 'Select All Checkbox'},
        { data: 'identifier' },
-       { data: 'subject' }, 
+       { data: 'subject', 'class' : 'text_highlight_messages' }, 
        { data: 'content' },
        { data: 'sent_date' },
     ],
@@ -226,6 +237,39 @@ function htmlDecode(input){
     }); 
         jQuery('#DescModal').modal("show");
         jQuery(".text-left").html("<div class='message-details'>" +full_row + "</div>");
+    
+            jQuery("#DescModal").attr("tabindex",-1).focus();
+
+    var tabbable = jQuery("#DescModal").find('select, input, textarea, button, a').filter(':visible');
+    
+    var firstTabbable = tabbable.first();
+    /*set focus on first input*/
+    firstTabbable.focus();
+    
+jQuery(document).on('keydown', function(e) {
+    var target = e.target;
+    var shiftPressed = e.shiftKey;
+    // If TAB key pressed
+    if (e.keyCode == 9) {
+        // If inside a Modal dialog (determined by attribute id=wpsc_popup)
+        if (jQuery(target).parents('[class=modal-dialog]').length) {                            
+            // Find first or last input element in the dialog parent (depending on whether Shift was pressed). 
+            // Input elements must be visible, and can be Input/Select/Button/Textarea.
+            var borderElem = shiftPressed ?
+                                jQuery(target).closest('[class=modal-dialog]').find('a:visible,input:visible,select:visible,button:visible,textarea:visible').first() 
+                             :
+                                jQuery(target).closest('[class=modal-dialog]').find('a:visible,input:visible,select:visible,button:visible,textarea:visible').last();
+            if (jQuery(borderElem).length) {
+                if (jQuery(target).is(jQuery(borderElem))) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+    }
+    return true;
+});
 
     table.ajax.reload( null, false );
     });
