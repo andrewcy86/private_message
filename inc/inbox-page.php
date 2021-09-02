@@ -156,7 +156,7 @@ jQuery(document).ready(function() {
 	     "stateSave": true,
          "paging" : true,
          "responsive" : true,
-		 "aLengthMenu": [[10, 20, 30, -1], [10, 20, 30, "All"]],
+		 "aLengthMenu": [[10, 25, 50, 100], [10, 25, 50, 100]],
 		 		'drawCallback': function (settings) { 
 	        // Here the response
 	        var response = settings.json;
